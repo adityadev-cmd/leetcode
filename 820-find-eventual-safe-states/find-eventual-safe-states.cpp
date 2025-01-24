@@ -18,7 +18,7 @@ public:
             }
         }
 
-        while(q.size()){
+        while(!q.empty()){
             int u = q.front() ; q.pop();
             ans.push_back(u);
 
