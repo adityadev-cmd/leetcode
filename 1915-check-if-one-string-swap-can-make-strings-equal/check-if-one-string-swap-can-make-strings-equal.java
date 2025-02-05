@@ -1,24 +1,21 @@
 class Solution {
     public boolean areAlmostEqual(String s1, String s2) {
         int n = s1.length();
-        int count =0;
-        // check for frequency //
-        int arr[] = new int[26];
-        for (int i = 0; i< n; i ++){
-            arr[s1.charAt(i)-'a'] ++;
-        }
-        for (int i = 0;i <n ; i ++){
-            arr[s2.charAt(i) - 'a'] --;
-            if (arr[s2.charAt(i) - 'a'] < 0)
-               return false;
-        }
-        for (int i=0;i<n;i++){
-            if (s1.charAt(i) != s2.charAt(i)){
+        int i = -1;
+        int j = -1;
+        int count = 0;
+
+        for (int k = 0 ; k < n ;k ++){
+            if (s1.charAt(k) != s2.charAt(k)){
                 count ++;
+                if (i == -1) i = k;
+                else if (j == -1) j = k;
             }
         }
-        if (count == 2 || count == 0)
-        return true;
+        if (count == 0) return true;
+        if (count == 2 && s1.charAt(i) == s2.charAt(j) && s1.charAt(j) == s2.charAt(i)){
+            return true;
+        }
         return false;
     }
 }
