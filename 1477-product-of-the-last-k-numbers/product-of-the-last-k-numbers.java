@@ -4,21 +4,26 @@ class ProductOfNumbers {
         // array
         ///dynamic array
        arr = new ArrayList<>();
+       arr.add(1);
     }
     
     public void add(int num) {
-        arr.add(num);
+        if (num == 0){
+            arr.clear();
+            arr.add(1);
+            return;
+        }
+        int n = arr.size();
+        arr.add(arr.get(n-1) * num);
     }
     
     public int getProduct(int k) {
         // give product of last k elements;
-        int lastpos = arr.size() - 1;
-        int product = 1;
-        while(k-- > 0){
-            product *= arr.get(lastpos);
-            lastpos --;
+        int n = arr.size();
+        if (k >= n ){
+            return 0;
         }
-        return product;
+        return (arr.get(n-1)/arr.get(n-1-k));
     }
 }
 
