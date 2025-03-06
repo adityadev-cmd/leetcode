@@ -22,9 +22,6 @@ class Solution {
             list.add(new Pair(speed[i], position[i]));
         }
         Collections.sort(list); // on basis of position
-        for (int i = 0; i < n; i++) {
-            System.out.println(list.get(i).first+" "+list.get(i).second);
-        }
         int prev = -1;
         List<Double> ans = new ArrayList<>();
         for (int i = 0; i < n; i++) {
@@ -35,10 +32,6 @@ class Solution {
             if (ans.size() == 0 || ans.get(ans.size() - 1) < hr) {
                 ans.add(hr);
             }
-        }
-
-        for (Double ele: ans){
-            System.out.println(ele);
         }
         
         return ans.size();
