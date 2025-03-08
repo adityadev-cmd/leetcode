@@ -4,7 +4,6 @@ class Solution {
         for(int i=0;i< nums.length;i++){
             val += Math.ceil((double)nums[i]/mid);
         }
-        System.out.println(val);
         return val <= threshold;
     }
     public int smallestDivisor(int[] nums, int threshold) {
