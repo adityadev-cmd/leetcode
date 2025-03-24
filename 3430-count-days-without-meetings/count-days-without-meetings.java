@@ -20,7 +20,7 @@ class Solution {
         }
 
         if (days > prevEnd){
-            return  days - prevEnd + count;
+            count += days - prevEnd;
         }
         return count;        
     }
