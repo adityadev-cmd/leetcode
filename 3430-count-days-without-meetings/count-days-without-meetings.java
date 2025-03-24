@@ -12,11 +12,8 @@ class Solution {
             int end = meetings[i][1];
             if (prevEnd < start){
                 count += start - prevEnd - 1;
-                prevEnd = end;
             }
-            else {
-                prevEnd = Math.max(prevEnd,end);
-            }
+            prevEnd = Math.max(prevEnd,end);
         }
 
         if (days > prevEnd){
