@@ -1,37 +1,36 @@
 class Solution {
     public int minOperations(int[][] grid, int x) {
+        //check if % should be same if x!=1
         int n = grid.length;
         int m = grid[0].length;
-        int arr [] = new int[n * m];
-        int sum =0 ,k = 0;
-        int rem = grid[0][0] % x ;
-        for (int i =0 ;i < n ;i ++){
-            for (int j =0 ; j < m ;j ++){
-                if (rem != grid[i][j] %x){
-                    return -1;
-                }
-                sum += grid[i][j];
-                arr[k++] = grid[i][j];
+        int N = m*n;
+        int [] freq = new int[100001];
+        int minn = grid[0][0], maxx = minn;
+        for (int row[] : grid){
+            for (int val : row){
+                if ((val - grid[0][0])%x !=0)
+                return -1;
+                freq[val] ++;
+                minn = Math.min(minn, val);
+                maxx = Math.max(maxx,val);
             }
         }
-        Arrays.sort(arr);
-        int newLen = arr.length;
-        // for (int i =0 ;i < newLen; i ++){
-        //     System.out.println(arr[i]);
-        // }
-        int operations = 0;
-        int prefix =0 ;
-        int suffix = sum;
-        int res = Integer.MAX_VALUE;
-        for (int i = 0; i<newLen;i++ ){
-            suffix = suffix - arr[i];
-            int left = ((arr[i] * i) - prefix);
-            int right = (suffix - (arr[i] * (newLen-i-1)));
-            // System.out.println(i+"->"+left+"->"+right);
-            operations = (left + right)/x;
-            res = Math.min(res,operations);
-            prefix += arr[i];
+
+        int target = (N+1)/2;
+        int median = minn, acc = 0;
+
+        for (int i = minn;i<=maxx;i = i + x){
+            acc += freq[i];
+            if (acc >= target){
+                median = i;
+                break;
+            }
         }
-        return res;
+
+        int ops =0;
+        for (int i = minn; i<=maxx;i+=x){
+            ops += Math.abs(i-median) / x * freq[i];
+        }
+        return ops;
     }
 }
